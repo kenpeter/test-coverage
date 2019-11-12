@@ -1,28 +1,50 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledTextArea = styled.textarea`
-  border: 1px solid #ccc;
-  width: 500px;
-`;
-
-export function FuncTextArea({onChange = () => {}}) {
+export function TestZone({
+  Icon,
+  getRootProps,
+  getInputProps,
+  msg1 = null,
+  msg2 = null,
+  msg3
+}) {
   return (
-    <div>
-      <h1>hi</h1>
-      <StyledTextArea onChange={onChange} />
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      <div>
+        <div>
+          <Icon />
+        </div>
+        <div>
+          {msg1 !== null ? <div>{msg1}</div> : null}
+          <div>{msg2}</div>
+          <div>{msg3}</div>
+        </div>
+      </div>
     </div>
   );
 }
 
 function App() {
-  const onChange = () => {
-    console.log('it works');
+  const Icon = () => {
+    return <div>icon</div>;
   };
-
+  const getRootProps = () => {
+    return {id: 'id1'};
+  };
+  const getInputProps = () => {
+    return {id: 'id2'};
+  };
   return (
     <div>
-      <FuncTextArea onChange={onChange} />
+      <TestZone
+        Icon={Icon}
+        getRootProps={getRootProps}
+        getInputProps={getInputProps}
+        msg1={'hi1'}
+        msg2={'hi2'}
+        msg3={'hi3'}
+      />
     </div>
   );
 }
